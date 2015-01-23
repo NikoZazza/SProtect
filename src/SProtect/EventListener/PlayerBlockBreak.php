@@ -1,13 +1,14 @@
 <?php
 /* @author xionbig
- * @link http://xionbig.altervista.org/SignProtect 
- * @version 0.1.0 */
-
-namespace SignProtect\EventListener;
+ * @link http://xionbig.altervista.org/SProtect 
+ * @link http://forums.pocketmine.net/plugins/sprotect.882/
+ * @version 0.2.0 */
+namespace SProtect\EventListener;
 
 use pocketmine\event\Listener;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\item\Item;
+use pocketmine\Server;
 
 class PlayerBlockBreak implements Listener{
     private $SignMain;
@@ -25,17 +26,14 @@ class PlayerBlockBreak implements Listener{
             
             if($this->SignMain->getProvider()->exists($var)){
                 $get = $this->SignMain->getProvider()->get($var);
-                if(isset($this->SignMain->action[$player->getDisplayName()]) && $this->SignMain->action[$player->getDisplayName()]["action"] == "unprotect"){
-                    if($get["maker"] == strtolower($player->getDisplayName())){
-                        
-                        $player->sendMessage("[SignProtect] The Sign has been removed successfully.");
-                        $this->SignMain->getProvider()->remove($var);
-                        unset($this->SignMain->action[$player->getDisplayName()]);
-                        return;
-                    }
+                if($get["maker"] == strtolower($player->getDisplayName())){  
+                    $player->sendMessage("[SProtect] The Sign has been removed successfully.");
+                    $this->SignMain->getProvider()->remove($var);
+                }else{
+                    $player->sendMessage("[SProtect] This sign is not yours!");
+                    $event->setCancelled();
+                    $this->SignMain->respawnSign($var);
                 }
-                $player->sendMessage("[SignProtect] This sign is not yours!");
-                $event->setCancelled();
             }
         } 
     }

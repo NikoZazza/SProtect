@@ -1,23 +1,23 @@
 ---
-name: SignProtect
-main: SignProtect\SignProtect
-version: 0.1.0
-api: [1.8.0]
+name: SProtect
+main: SProtect\SProtect
+version: 0.2.0
+api: [1.10.0]
 load: POSTWORLD
 author: xionbig
 authors: [xionbig]
 description: "Command to PROTECT some Sign on the server."
-website: http://xionbig.altervista.org/SignProtect
-prefix: "SignProtect"
+website: http://xionbig.altervista.org/SProtect
+prefix: "SProtect"
 commands:
- signp:
+ sprotect:
   description: "Command to PROTECT some Sign on the server."
-  permission: signp.command
+  permission: sprotect.command
 permissions:
- signp:
+ sprotect:
   default: notop
-  description: "Allows do all that SignProtect"
+  description: "Allows do all that SProtect"
   children:
-   signp.command:
+   sprotect.command:
     default: true
-    description: "Allows using all the SignProtect commands"
+    description: "Allows using all the SProtect commands"
